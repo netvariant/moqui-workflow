@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
+
+    <!-- Workflow -->
+    <view-entity entity-name="WorkflowDetail" package="moqui.workflow">
+        <member-entity entity-alias="workflow" entity-name="moqui.workflow.Workflow"/>
+        <member-entity entity-alias="workflowType" entity-name="moqui.workflow.WorkflowType" join-from-alias="workflow">
+            <key-map field-name="workflowTypeId"/>
+        </member-entity>
+        <member-entity entity-alias="statusFlow" entity-name="moqui.basic.StatusFlow" join-from-alias="workflow">
+            <key-map field-name="statusFlowId"/>
+        </member-entity>
+        <member-entity entity-alias="launchType" entity-name="moqui.basic.Enumeration" join-from-alias="workflow">
+            <key-map field-name="launchTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="reminderUom" entity-name="moqui.basic.Uom" join-from-alias="workflow">
+            <key-map field-name="reminderIntervalUomId"/>
+        </member-entity>
+        <member-entity entity-alias="inputUser" entity-name="moqui.security.UserAccount" join-from-alias="workflow" join-optional="true">
+            <key-map field-name="inputUserId"/>
+        </member-entity>
+        <member-entity entity-alias="updateUser" entity-name="moqui.security.UserAccount" join-from-alias="workflow" join-optional="true">
+            <key-map field-name="updateUserId"/>
+        </member-entity>
+
+        <alias-all entity-alias="workflow"/>
+        <alias name="workflowTypeName" entity-alias="workflowType" field="typeName"/>
+        <alias name="primaryEntityName" entity-alias="workflowType" field="primaryEntityName"/>
+        <alias name="primaryViewEntityName" entity-alias="workflowType" field="primaryViewEntityName"/>
+        <alias name="primaryKeyField" entity-alias="workflowType" field="primaryKeyField"/>
+        <alias name="statusFlowId" entity-alias="statusFlow" field="statusFlowId"/>
+        <alias name="statusFlowDescription" entity-alias="statusFlow" field="description"/>
+        <alias name="launchTypeDescription" entity-alias="launchType" field="description"/>
+        <alias name="reminderIntervalDescription" entity-alias="reminderUom" field="description"/>
+        <alias name="inputUserFullName" entity-alias="inputUser" field="userFullName"/>
+        <alias name="updateUserFullName" entity-alias="updateUser" field="userFullName"/>
+    </view-entity>
+    <view-entity entity-name="WorkflowInitiatorDetail" package="moqui.workflow">
+        <member-entity entity-alias="initiator" entity-name="moqui.workflow.WorkflowInitiator"/>
+        <member-entity entity-alias="workflow" entity-name="moqui.workflow.Workflow" join-from-alias="initiator">
+            <key-map field-name="workflowId"/>
+        </member-entity>
+        <member-entity entity-alias="userGroup" entity-name="moqui.security.UserGroup" join-from-alias="initiator">
+            <key-map field-name="userGroupId"/>
+        </member-entity>
+        <member-entity entity-alias="inputUser" entity-name="moqui.security.UserAccount" join-from-alias="initiator" join-optional="true">
+            <key-map field-name="inputUserId"/>
+        </member-entity>
+        <member-entity entity-alias="updateUser" entity-name="moqui.security.UserAccount" join-from-alias="initiator" join-optional="true">
+            <key-map field-name="updateUserId"/>
+        </member-entity>
+
+        <alias-all entity-alias="initiator"/>
+        <alias name="workflowName" entity-alias="workflow" field="workflowName"/>
+        <alias name="workflowDescription" entity-alias="workflow" field="description"/>
+        <alias name="userGroupDescription" entity-alias="userGroup" field="description"/>
+        <alias name="inputUserFullName" entity-alias="inputUser" field="userFullName"/>
+        <alias name="updateUserFullName" entity-alias="updateUser" field="userFullName"/>
+    </view-entity>
+    <view-entity entity-name="WorkflowVariableDetail" package="moqui.workflow">
+        <member-entity entity-alias="variable" entity-name="moqui.workflow.WorkflowVariable"/>
+        <member-entity entity-alias="workflow" entity-name="moqui.workflow.Workflow" join-from-alias="variable">
+            <key-map field-name="workflowId"/>
+        </member-entity>
+        <member-entity entity-alias="variableType" entity-name="moqui.basic.Enumeration" join-from-alias="variable">
+            <key-map field-name="variableTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="inputUser" entity-name="moqui.security.UserAccount" join-from-alias="variable" join-optional="true">
+            <key-map field-name="inputUserId"/>
+        </member-entity>
+
+        <alias-all entity-alias="variable"/>
+        <alias name="workflowName" entity-alias="workflow" field="workflowName"/>
+        <alias name="workflowDescription" entity-alias="workflow" field="description"/>
+        <alias name="variableTypeDescription" entity-alias="variableType" field="description"/>
+        <alias name="inputUserFullName" entity-alias="inputUser" field="userFullName"/>
+    </view-entity>
+    <view-entity entity-name="WorkflowActivityDetail" package="moqui.workflow">
+        <member-entity entity-alias="activity" entity-name="moqui.workflow.WorkflowActivity"/>
+        <member-entity entity-alias="workflow" entity-name="moqui.workflow.Workflow" join-from-alias="activity">
+            <key-map field-name="workflowId"/>
+        </member-entity>
+        <member-entity entity-alias="activityType" entity-name="moqui.basic.Enumeration" join-from-alias="activity">
+            <key-map field-name="activityTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="inputUser" entity-name="moqui.security.UserAccount" join-from-alias="activity" join-optional="true">
+            <key-map field-name="inputUserId"/>
+        </member-entity>
+        <member-entity entity-alias="updateUser" entity-name="moqui.security.UserAccount" join-from-alias="activity" join-optional="true">
+            <key-map field-name="updateUserId"/>
+        </member-entity>
+
+        <alias-all entity-alias="activity"/>
+        <alias name="workflowName" entity-alias="workflow" field="workflowName"/>
+        <alias name="workflowDescription" entity-alias="workflow" field="description"/>
+        <alias name="activityTypeDescription" entity-alias="activityType" field="description"/>
+        <alias name="inputUserFullName" entity-alias="inputUser" field="userFullName"/>
+        <alias name="updateUserFullName" entity-alias="updateUser" field="userFullName"/>
+    </view-entity>
+    <view-entity entity-name="WorkflowTransitionDetail" package="moqui.workflow">
+        <member-entity entity-alias="transition" entity-name="moqui.workflow.WorkflowTransition"/>
+        <member-entity entity-alias="workflow" entity-name="moqui.workflow.Workflow" join-from-alias="transition">
+            <key-map field-name="workflowId"/>
+        </member-entity>
+        <member-entity entity-alias="fromActivity" entity-name="moqui.workflow.WorkflowActivity" join-from-alias="transition">
+            <key-map field-name="fromActivityId"/>
+        </member-entity>
+        <member-entity entity-alias="fromActivityType" entity-name="moqui.basic.Enumeration" join-from-alias="fromActivity">
+            <key-map field-name="activityTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="fromPortType" entity-name="moqui.basic.Enumeration" join-from-alias="transition">
+            <key-map field-name="fromPortTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="toActivity" entity-name="moqui.workflow.WorkflowActivity" join-from-alias="transition">
+            <key-map field-name="toActivityId"/>
+        </member-entity>
+        <member-entity entity-alias="toActivityType" entity-name="moqui.basic.Enumeration" join-from-alias="toActivity">
+            <key-map field-name="activityTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="toPortType" entity-name="moqui.basic.Enumeration" join-from-alias="transition">
+            <key-map field-name="toPortTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="inputUser" entity-name="moqui.security.UserAccount" join-from-alias="transition" join-optional="true">
+            <key-map field-name="inputUserId"/>
+        </member-entity>
+        <member-entity entity-alias="updateUser" entity-name="moqui.security.UserAccount" join-from-alias="transition" join-optional="true">
+            <key-map field-name="updateUserId"/>
+        </member-entity>
+
+        <alias-all entity-alias="transition"/>
+        <alias name="workflowName" entity-alias="workflow" field="workflowName"/>
+        <alias name="workflowDescription" entity-alias="workflow" field="description"/>
+        <alias name="fromActivityTypeEnumId" entity-alias="fromActivityType" field="enumId"/>
+        <alias name="fromActivityTypeDescription" entity-alias="fromActivityType" field="description"/>
+        <alias name="fromPortTypeDescription" entity-alias="fromPortType" field="description"/>
+        <alias name="toActivityTypeEnumId" entity-alias="toActivityType" field="enumId"/>
+        <alias name="toActivityTypeDescription" entity-alias="toActivityType" field="description"/>
+        <alias name="toPortTypeDescription" entity-alias="toPortType" field="description"/>
+        <alias name="inputUserFullName" entity-alias="inputUser" field="userFullName"/>
+        <alias name="updateUserFullName" entity-alias="updateUser" field="userFullName"/>
+    </view-entity>
+
+    <!-- Workflow instance -->
+    <view-entity entity-name="WorkflowInstanceDetail" package="moqui.workflow">
+        <member-entity entity-alias="instance" entity-name="moqui.workflow.WorkflowInstance"/>
+        <member-entity entity-alias="workflow" entity-name="moqui.workflow.Workflow" join-from-alias="instance">
+            <key-map field-name="workflowId"/>
+        </member-entity>
+        <member-entity entity-alias="workflowType" entity-name="moqui.workflow.WorkflowType" join-from-alias="workflow">
+            <key-map field-name="workflowTypeId"/>
+        </member-entity>
+        <member-entity entity-alias="activity" entity-name="moqui.workflow.WorkflowActivity" join-from-alias="instance" join-optional="true">
+            <key-map field-name="activityId"/>
+        </member-entity>
+        <member-entity entity-alias="activityType" entity-name="moqui.basic.Enumeration" join-from-alias="activity" join-optional="true">
+            <key-map field-name="activityTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="status" entity-name="moqui.basic.StatusItem" join-from-alias="instance">
+            <key-map field-name="statusId"/>
+        </member-entity>
+        <member-entity entity-alias="actionType" entity-name="moqui.basic.Enumeration" join-from-alias="instance">
+            <key-map field-name="actionTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="inputUser" entity-name="moqui.security.UserAccount" join-from-alias="instance" join-optional="true">
+            <key-map field-name="inputUserId"/>
+        </member-entity>
+
+        <alias-all entity-alias="instance"/>
+        <alias name="workflowName" entity-alias="workflow" field="workflowName"/>
+        <alias name="workflowDescription" entity-alias="workflow" field="description"/>
+        <alias name="workflowDisabled" entity-alias="workflow" field="disabled"/>
+        <alias name="workflowTypeId" entity-alias="workflowType" field="typeId"/>
+        <alias name="workflowTypeName" entity-alias="workflowType" field="typeName"/>
+        <alias name="primaryEntityName" entity-alias="workflowType" field="primaryEntityName"/>
+        <alias name="primaryViewEntityName" entity-alias="workflowType" field="primaryViewEntityName"/>
+        <alias name="activityTypeEnumId" entity-alias="activityType" field="enumId"/>
+        <alias name="activityTypeDescription" entity-alias="activityType" field="description"/>
+        <alias name="actionTypeDescription" entity-alias="actionType" field="description"/>
+        <alias name="statusDescription" entity-alias="status" field="description"/>
+        <alias name="inputUserFullName" entity-alias="inputUser" field="userFullName"/>
+    </view-entity>
+    <view-entity entity-name="WorkflowInstanceVariableDetail" package="moqui.workflow">
+        <member-entity entity-alias="instanceVariable" entity-name="moqui.workflow.WorkflowInstanceVariable"/>
+        <member-entity entity-alias="workflowVariable" entity-name="moqui.workflow.WorkflowVariable" join-from-alias="instanceVariable">
+            <key-map field-name="variableId"/>
+        </member-entity>
+        <member-entity entity-alias="variableType" entity-name="moqui.basic.Enumeration" join-from-alias="workflowVariable">
+            <key-map field-name="variableTypeEnumId"/>
+        </member-entity>
+
+        <alias-all entity-alias="instanceVariable"/>
+        <alias name="variableName" entity-alias="workflowVariable" field="variableName"/>
+        <alias name="defaultValue" entity-alias="workflowVariable" field="defaultValue"/>
+        <alias name="variableTypeEnumId" entity-alias="variableType" field="enumId"/>
+        <alias name="variableTypeDescription" entity-alias="variableType" field="description"/>
+    </view-entity>
+    <view-entity entity-name="WorkflowInstanceEventDetail" package="moqui.workflow">
+        <member-entity entity-alias="instanceEvent" entity-name="moqui.workflow.WorkflowInstanceEvent"/>
+        <member-entity entity-alias="eventType" entity-name="moqui.basic.Enumeration" join-from-alias="instanceEvent">
+            <key-map field-name="eventTypeEnumId"/>
+        </member-entity>
+
+        <alias-all entity-alias="instanceEvent"/>
+        <alias name="eventTypeDescription" entity-alias="eventType" field="description"/>
+    </view-entity>
+    <view-entity entity-name="WorkflowInstanceTaskDetail" package="moqui.workflow">
+        <member-entity entity-alias="task" entity-name="moqui.workflow.WorkflowInstanceTask"/>
+        <member-entity entity-alias="taskType" entity-name="moqui.basic.Enumeration" join-from-alias="task">
+            <key-map field-name="taskTypeEnumId"/>
+        </member-entity>
+        <member-entity entity-alias="taskStatus" entity-name="moqui.basic.StatusItem" join-from-alias="task">
+            <key-map field-name="statusId"/>
+        </member-entity>
+        <member-entity entity-alias="instance" entity-name="moqui.workflow.WorkflowInstance" join-from-alias="task">
+            <key-map field-name="instanceId"/>
+        </member-entity>
+        <member-entity entity-alias="instanceStatus" entity-name="moqui.basic.StatusItem" join-from-alias="instance">
+            <key-map field-name="statusId"/>
+        </member-entity>
+        <member-entity entity-alias="workflow" entity-name="moqui.workflow.Workflow" join-from-alias="instance">
+            <key-map field-name="workflowId"/>
+        </member-entity>
+        <member-entity entity-alias="variable" entity-name="moqui.workflow.WorkflowVariable" join-from-alias="task" join-optional="true">
+            <key-map field-name="variableId"/>
+        </member-entity>
+        <member-entity entity-alias="instanceVariable" entity-name="moqui.workflow.WorkflowInstanceVariable" join-from-alias="task" join-optional="true">
+            <key-map field-name="instanceId"/>
+            <key-map field-name="variableId"/>
+        </member-entity>
+        <member-entity entity-alias="assignedUser" entity-name="moqui.security.UserAccount" join-from-alias="task">
+            <key-map field-name="assignedUserId"/>
+        </member-entity>
+
+        <alias-all entity-alias="task"/>
+        <alias name="instancePrimaryKeyValue" entity-alias="instance" field="primaryKeyValue"/>
+        <alias name="instanceActionTypeEnumId" entity-alias="instance" field="actionTypeEnumId"/>
+        <alias name="instanceActivityId" entity-alias="instance" field="activityId"/>
+        <alias name="instanceStatusId" entity-alias="instance" field="statusId"/>
+        <alias name="instanceTimeoutDate" entity-alias="instance" field="timeoutDate"/>
+        <alias name="workflowName" entity-alias="workflow" field="workflowName"/>
+        <alias name="workflowDescription" entity-alias="workflow" field="description"/>
+        <alias name="workflowTypeId" entity-alias="workflow" field="workflowTypeId"/>
+        <alias name="workflowStatusFlowId" entity-alias="workflow" field="statusFlowId"/>
+        <alias name="workflowDisabled" entity-alias="workflow" field="disabled"/>
+        <alias name="variableName" entity-alias="variable" field="variableName"/>
+        <alias name="variableDescription" entity-alias="variable" field="description"/>
+        <alias name="variableTypeEnumId" entity-alias="variable" field="variableTypeEnumId"/>
+        <alias name="variableDefinedValue" entity-alias="instanceVariable" field="definedValue"/>
+        <alias name="assignedUserFullName" entity-alias="assignedUser" field="userFullName"/>
+        <alias name="taskTypeDescription" entity-alias="taskType" field="description"/>
+        <alias name="statusDescription" entity-alias="taskStatus" field="description"/>
+    </view-entity>
+
+</entities>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml type="seed">
+
+    <!-- Entity field type -->
+    <moqui.basic.EnumerationType description="Entity Field Type" enumTypeId="EntityFieldType"/>
+    <moqui.basic.Enumeration description="Text" enumId="ENTITY_FLD_TEXT" enumTypeId="EntityFieldType" sequenceNum="1"/>
+    <moqui.basic.Enumeration description="Number" enumId="ENTITY_FLD_NUMBER" enumTypeId="EntityFieldType" sequenceNum="2"/>
+    <moqui.basic.Enumeration description="Date" enumId="ENTITY_FLD_DATE" enumTypeId="EntityFieldType" sequenceNum="3"/>
+    <moqui.basic.Enumeration description="Boolean" enumId="ENTITY_FLD_BOOLEAN" enumTypeId="EntityFieldType" sequenceNum="4"/>
+
+</entity-facade-xml>

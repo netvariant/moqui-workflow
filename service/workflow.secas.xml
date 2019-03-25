@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<secas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-eca-2.1.xsd">
+
+    <seca service="org.moqui.workflow.WorkflowServices.create#WorkflowInstance" when="post-service">
+        <actions>
+            <service-call name="org.moqui.workflow.WorkflowServices.start#WorkflowInstance">
+                <field-map field-name="instanceId" from="instanceId"/>
+            </service-call>
+        </actions>
+    </seca>
+    <seca service="org.moqui.workflow.WorkflowServices.update#WorkflowInstanceTask" when="post-service">
+        <actions>
+            <entity-find-one entity-name="moqui.workflow.WorkflowInstanceTask" value-field="task">
+                <field-map field-name="taskId" from="taskId"/>
+            </entity-find-one>
+            <service-call name="org.moqui.workflow.WorkflowServices.start#WorkflowInstance">
+                <field-map field-name="instanceId" from="task.instanceId"/>
+            </service-call>
+        </actions>
+    </seca>
+
+</secas>

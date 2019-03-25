@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml type="seed">
+
+    <moqui.basic.LocalizedMessage original="ENTITY_FIELD_NOT_FOUND" locale="en" localized="Entity field not found"/>
+
+    <moqui.basic.LocalizedMessage original="WORKFLOW_NOT_FOUND" locale="en" localized="Workflow not found"/>
+    <moqui.basic.LocalizedMessage original="WORKFLOW_DISABLED" locale="en" localized="Workflow is disabled"/>
+
+    <moqui.basic.LocalizedMessage original="WORKFLOW_INSTANCE_NOT_FOUND" locale="en" localized="Workflow instance not found"/>
+    <moqui.basic.LocalizedMessage original="WORKFLOW_INSTANCE_NOT_OPERABLE" locale="en" localized="Workflow instance not in operable state"/>
+    <moqui.basic.LocalizedMessage original="WORKFLOW_INSTANCE_NO_ENTRY_ACTIVITY" locale="en" localized="Workflow instance has no entry activity"/>
+    <moqui.basic.LocalizedMessage original="WORKFLOW_INSTANCE_RESUMED_SUCCESSFULLY" locale="en" localized="Workflow instance resumed successfully"/>
+    <moqui.basic.LocalizedMessage original="WORKFLOW_INSTANCE_ABORTED_SUCCESSFULLY" locale="en" localized="Workflow instance aborted successfully"/>
+
+</entity-facade-xml>

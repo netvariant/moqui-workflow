@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml type="seed">
+
+    <!-- Workflow Screens -->
+    <moqui.security.ArtifactGroup artifactGroupId="WORKFLOW_APP" description="Workflow App (via root screen)"/>
+    <moqui.security.ArtifactGroupMember artifactGroupId="WORKFLOW_APP" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y" nameIsPattern="N" artifactName="component://moqui-workflow/screen/Workflow.xml"/>
+
+    <!-- Workflow API -->
+    <moqui.security.ArtifactGroup artifactGroupId="MOQUI_WORKFLOW_API" description="Moqui Workflow REST API"/>
+    <moqui.security.ArtifactGroupMember artifactGroupId="MOQUI_WORKFLOW_API" artifactTypeEnumId="AT_REST_PATH" inheritAuthz="Y" nameIsPattern="Y" artifactName="/moqui-workflow/*"/>
+    
+</entity-facade-xml>

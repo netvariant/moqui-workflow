@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
+
+    <!-- Workflow -->
+    <entity entity-name="WorkflowType" package="moqui.workflow">
+        <description>
+            Defines the supported workflow types.
+            Each type has a primary entity name, primary view entity name and primary key field name.
+            Primary entity is used for the write operations where as primary view entity is used for querying and condition matching.
+            Applications must define their own workflow types.
+        </description>
+
+        <field name="typeId" type="id" is-pk="true"/>
+        <field name="statusTypeId" type="id"/>
+        <field name="typeName" type="text-medium"/>
+        <field name="primaryEntityName" type="text-medium"/>
+        <field name="primaryViewEntityName" type="text-medium"/>
+        <field name="primaryKeyField" type="text-medium"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+
+        <relationship type="one" related="moqui.basic.StatusType" short-alias="statusType">
+            <key-map field-name="statusTypeId"/>
+        </relationship>
+    </entity>
+    <entity entity-name="Workflow" package="moqui.workflow">
+        <field name="workflowId" type="id" is-pk="true"/>
+        <field name="workflowTypeId" type="id"/>
+        <field name="statusFlowId" type="id"/>
+        <field name="launchTypeEnumId" type="id"/>
+        <field name="workflowName" type="text-medium"/>
+        <field name="description" type="text-long"/>
+        <field name="modelData" type="text-very-long"/>
+        <field name="reminderInterval" type="number-integer"/>
+        <field name="reminderIntervalUomId" type="id"/>
+        <field name="reminderLimit" type="number-integer"/>
+        <field name="disabled" type="text-indicator"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+        <field name="inputUserId" type="id" default="ec.user.userId"/>
+        <field name="updateUserId" type="id" default="ec.user.userId"/>
+
+        <relationship type="one" related="moqui.workflow.WorkflowType" short-alias="workflowType">
+            <key-map field-name="workflowTypeId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowLaunchType" related="moqui.basic.Enumeration" short-alias="launchType">
+            <key-map field-name="launchTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="moqui.basic.StatusFlow" short-alias="statusFlow">
+            <key-map field-name="statusFlowId"/>
+        </relationship>
+        <relationship type="one" related="moqui.basic.Uom" short-alias="reminderInterval">
+            <key-map field-name="reminderIntervalUomId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" fk-name="WF_INPUT_USR_ID" short-alias="inputUser">
+            <key-map field-name="inputUserId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" fk-name="WF_UPDATE_USR_ID" short-alias="updateUser">
+            <key-map field-name="updateUserId"/>
+        </relationship>
+        <relationship type="many" related="moqui.workflow.WorkflowInitiator" short-alias="initiators">
+            <key-map field-name="workflowId"/>
+        </relationship>
+        <relationship type="many" related="moqui.workflow.WorkflowActivity" short-alias="activities">
+            <key-map field-name="workflowId"/>
+        </relationship>
+        <relationship type="many" related="moqui.workflow.WorkflowTransition" short-alias="transitions">
+            <key-map field-name="workflowId"/>
+        </relationship>
+        <relationship type="many" related="moqui.workflow.WorkflowInstance" short-alias="instances">
+            <key-map field-name="workflowId"/>
+        </relationship>
+
+        <master>
+            <detail relationship="initiators"/>
+            <detail relationship="activities"/>
+            <detail relationship="transitions"/>
+            <detail relationship="instances"/>
+        </master>
+    </entity>
+    <entity entity-name="WorkflowInitiator" package="moqui.workflow">
+        <field name="initiatorId" type="id" is-pk="true"/>
+        <field name="workflowId" type="id"/>
+        <field name="userGroupId" type="id"/>
+        <field name="fromDate" type="date-time"/>
+        <field name="toDate" type="date-time"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+        <field name="inputUserId" type="id" default="ec.user.userId"/>
+        <field name="updateUserId" type="id" default="ec.user.userId"/>
+
+        <relationship type="one" related="moqui.workflow.Workflow" short-alias="workflow">
+            <key-map field-name="workflowId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserGroup" short-alias="userGroup">
+            <key-map field-name="userGroupId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" fk-name="WF_INIT_INPUT_USR_ID" short-alias="inputUser">
+            <key-map field-name="inputUserId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" fk-name="WF_INIT_UPDATE_USR_ID" short-alias="updateUser">
+            <key-map field-name="updateUserId"/>
+        </relationship>
+    </entity>
+    <entity entity-name="WorkflowVariable" package="moqui.workflow">
+        <field name="variableId" type="id" is-pk="true"/>
+        <field name="workflowId" type="id"/>
+        <field name="variableTypeEnumId" type="id"/>
+        <field name="variableName" type="text-medium"/>
+        <field name="description" type="text-long"/>
+        <field name="defaultValue" type="text-long"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+        <field name="inputUserId" type="id" default="ec.user.userId"/>
+
+        <relationship type="one" related="moqui.workflow.Workflow" short-alias="workflow">
+            <key-map field-name="workflowId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowVariableType" related="moqui.basic.Enumeration" short-alias="variableType">
+            <key-map field-name="variableTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" short-alias="inputUser">
+            <key-map field-name="inputUserId"/>
+        </relationship>
+    </entity>
+    <entity entity-name="WorkflowActivity" package="moqui.workflow">
+        <field name="activityId" type="id" is-pk="true"/>
+        <field name="workflowId" type="id"/>
+        <field name="activityTypeEnumId" type="id"/>
+        <field name="nodeId" type="text-medium"/>
+        <field name="nodeData" type="text-very-long"/>
+        <field name="timeoutInterval" type="number-integer"/>
+        <field name="timeoutUomId" type="id"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+        <field name="inputUserId" type="id" default="ec.user.userId"/>
+        <field name="updateUserId" type="id" default="ec.user.userId"/>
+
+        <relationship type="one" related="moqui.workflow.Workflow" short-alias="workflow">
+            <key-map field-name="workflowId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowActivityType" related="moqui.basic.Enumeration" short-alias="activityType">
+            <key-map field-name="activityTypeEnumId"/>
+        </relationship>
+        <relationship type="one-nofk" related="moqui.basic.Uom" short-alias="timeout">
+            <key-map field-name="timeoutUomId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" fk-name="WF_PROC_INPUT_USR_ID" short-alias="inputUser">
+            <key-map field-name="inputUserId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" fk-name="WF_PROC_UPDATE_USR_ID" short-alias="updateUser">
+            <key-map field-name="updateUserId"/>
+        </relationship>
+
+        <index name="wfActivityIdx1" unique="true">
+            <index-field name="workflowId"/>
+            <index-field name="nodeId"/>
+        </index>
+    </entity>
+    <entity entity-name="WorkflowTransition" package="moqui.workflow">
+        <field name="transitionId" type="id" is-pk="true"/>
+        <field name="workflowId" type="id"/>
+        <field name="fromActivityId" type="id"/>
+        <field name="fromPortTypeEnumId" type="id"/>
+        <field name="toActivityId" type="id"/>
+        <field name="toPortTypeEnumId" type="id"/>
+        <field name="nodeId" type="text-medium"/>
+        <field name="nodeData" type="text-very-long"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+        <field name="inputUserId" type="id" default="ec.user.userId"/>
+        <field name="updateUserId" type="id" default="ec.user.userId"/>
+
+        <relationship type="one" related="moqui.workflow.Workflow" short-alias="workflow">
+            <key-map field-name="workflowId"/>
+        </relationship>
+        <relationship type="one" title="FromActivity" related="moqui.workflow.WorkflowActivity" fk-name="WF_TRANS_FROM_ACT_FK" short-alias="fromActivity">
+            <key-map field-name="fromActivityId"/>
+        </relationship>
+        <relationship type="one" title="ToActivity" related="moqui.workflow.WorkflowActivity" fk-name="WF_TRANS_TO_ACT_FK" short-alias="toActivity">
+            <key-map field-name="toActivityId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowPortType" related="moqui.basic.Enumeration" fk-name="WF_TRANS_FROM_PORT_FK" short-alias="fromPortType">
+            <key-map field-name="fromPortTypeEnumId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowPortType" related="moqui.basic.Enumeration" fk-name="WF_TRANS_TO_PORT_FK" short-alias="toPortType">
+            <key-map field-name="toPortTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" fk-name="WF_TRANS_INPUT_USR_ID" short-alias="inputUser">
+            <key-map field-name="inputUserId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" fk-name="WF_TRANS_UPDATE_USR_ID" short-alias="updateUser">
+            <key-map field-name="updateUserId"/>
+        </relationship>
+
+        <index name="wfTransitionIdx1" unique="true">
+            <index-field name="workflowId"/>
+            <index-field name="fromActivityId"/>
+            <index-field name="fromPortTypeEnumId"/>
+            <index-field name="toActivityId"/>
+            <index-field name="toPortTypeEnumId"/>
+        </index>
+    </entity>
+
+    <!-- Workflow instance -->
+    <entity entity-name="WorkflowInstance" package="moqui.workflow">
+        <field name="instanceId" type="id" is-pk="true"/>
+        <field name="workflowId" type="id"/>
+        <field name="statusId" type="id"/>
+        <field name="primaryKeyValue" type="id"/>
+        <field name="actionTypeEnumId" type="id"/>
+        <field name="activityId" type="id"/>
+        <field name="activityExecuted" type="text-indicator" default="N"/>
+        <field name="semaphore" type="text-medium"/>
+        <field name="timeoutDate" type="date-time"/>
+        <field name="reminderCount" type="number-integer" default="0"/>
+        <field name="resultCode" type="number-integer"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+        <field name="lastReminderDate" type="date-time"/>
+        <field name="lastUpdateDate" type="date-time"/>
+        <field name="inputUserId" type="id" default="ec.user.userId"/>
+
+        <relationship type="one" related="moqui.workflow.Workflow" short-alias="workflow">
+            <key-map field-name="workflowId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowInstanceStatus" related="moqui.basic.StatusItem" short-alias="status">
+            <key-map field-name="statusId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowActionType" related="moqui.basic.Enumeration" short-alias="actionType">
+            <key-map field-name="actionTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" short-alias="inputUser">
+            <key-map field-name="inputUserId"/>
+        </relationship>
+        <relationship type="one-nofk" related="moqui.workflow.WorkflowActivity" short-alias="activity">
+            <key-map field-name="activityId"/>
+        </relationship>
+        <relationship type="many" related="moqui.workflow.WorkflowInstanceTask" short-alias="tasks">
+            <key-map field-name="instanceId"/>
+        </relationship>
+        <relationship type="many" related="moqui.workflow.WorkflowInstanceEvent" short-alias="events">
+            <key-map field-name="instanceId"/>
+        </relationship>
+
+        <master>
+            <detail relationship="tasks"/>
+            <detail relationship="events"/>
+        </master>
+    </entity>
+    <entity entity-name="WorkflowInstanceVariable" package="moqui.workflow">
+        <field name="instanceId" type="id" is-pk="true"/>
+        <field name="variableId" type="id" is-pk="true"/>
+        <field name="definedValue" type="text-long"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+
+        <relationship type="one" related="moqui.workflow.WorkflowInstance" short-alias="workflowInstance">
+            <key-map field-name="instanceId"/>
+        </relationship>
+        <relationship type="one" related="moqui.workflow.WorkflowVariable" short-alias="workflowVariable">
+            <key-map field-name="variableId"/>
+        </relationship>
+    </entity>
+    <entity entity-name="WorkflowInstanceEvent" package="moqui.workflow">
+        <field name="instanceId" type="id" is-pk="true"/>
+        <field name="eventSeqId" type="id" is-pk="true"/>
+        <field name="eventTypeEnumId" type="id"/>
+        <field name="sourceName" type="text-medium"/>
+        <field name="description" type="text-long"/>
+        <field name="wasError" type="text-indicator"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+
+        <relationship type="one" related="moqui.workflow.WorkflowInstance" short-alias="workflowInstance">
+            <key-map field-name="instanceId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowEventType" related="moqui.basic.Enumeration" short-alias="eventType">
+            <key-map field-name="eventTypeEnumId"/>
+        </relationship>
+    </entity>
+    <entity entity-name="WorkflowInstanceTask" package="moqui.workflow">
+        <field name="taskId" type="id" is-pk="true"/>
+        <field name="instanceId" type="id"/>
+        <field name="activityId" type="id"/>
+        <field name="assignedUserId" type="id"/>
+        <field name="taskTypeEnumId" type="id"/>
+        <field name="variableId" type="id"/>
+        <field name="statusId" type="id"/>
+        <field name="summary" type="text-medium"/>
+        <field name="description" type="text-long"/>
+        <field name="remark" type="text-long"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+        <field name="completionDate" type="date-time"/>
+
+        <relationship type="one" related="moqui.workflow.WorkflowInstance" short-alias="workflowInstance">
+            <key-map field-name="instanceId"/>
+        </relationship>
+        <relationship type="one" related="moqui.workflow.WorkflowActivity" short-alias="activity">
+            <key-map field-name="activityId"/>
+        </relationship>
+        <relationship type="one-nofk" related="moqui.workflow.WorkflowVariable" short-alias="variable">
+            <key-map field-name="variableId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowTaskType" related="moqui.basic.Enumeration" short-alias="taskType">
+            <key-map field-name="taskTypeEnumId"/>
+        </relationship>
+        <relationship type="one" title="WorkflowTaskStatus" related="moqui.basic.StatusItem" short-alias="status">
+            <key-map field-name="statusId"/>
+        </relationship>
+        <relationship type="one" related="moqui.security.UserAccount" short-alias="assignedUser">
+            <key-map field-name="assignedUserId"/>
+        </relationship>
+    </entity>
+
+</entities>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml type="seed">
+
+    <!-- Text comparison operator -->
+    <moqui.basic.EnumerationType description="Text Comparison Operator" enumTypeId="TextComparisonOperator"/>
+    <moqui.basic.Enumeration description="Equals" enumId="TXT_EQUALS" enumTypeId="TextComparisonOperator" sequenceNum="1"/>
+    <moqui.basic.Enumeration description="Not Equals" enumId="TXT_NOT_EQUALS" enumTypeId="TextComparisonOperator" sequenceNum="2"/>
+    <moqui.basic.Enumeration description="Starts With" enumId="TXT_STARTS_WITH" enumTypeId="TextComparisonOperator" sequenceNum="3"/>
+    <moqui.basic.Enumeration description="Ends With" enumId="TXT_ENDS_WITH" enumTypeId="TextComparisonOperator" sequenceNum="4"/>
+    <moqui.basic.Enumeration description="Contains" enumId="TXT_CONTAINS" enumTypeId="TextComparisonOperator" sequenceNum="5"/>
+    <moqui.basic.Enumeration description="Not Contains" enumId="TXT_NOT_CONTAINS" enumTypeId="TextComparisonOperator" sequenceNum="6"/>
+    <moqui.basic.Enumeration description="Empty" enumId="TXT_EMPTY" enumTypeId="TextComparisonOperator" sequenceNum="7"/>
+    <moqui.basic.Enumeration description="Not Empty" enumId="TXT_NOT_EMPTY" enumTypeId="TextComparisonOperator" sequenceNum="8"/>
+
+    <!-- Number comparison operator -->
+    <moqui.basic.EnumerationType description="Number Comparison Operator" enumTypeId="NumberComparisonOperator"/>
+    <moqui.basic.Enumeration description="Equals" enumId="NUM_EQUALS" enumTypeId="NumberComparisonOperator" sequenceNum="1"/>
+    <moqui.basic.Enumeration description="Not Equals" enumId="NUM_NOT_EQUALS" enumTypeId="NumberComparisonOperator" sequenceNum="2"/>
+    <moqui.basic.Enumeration description="Less Than" enumId="NUM_LESS_THAN" enumTypeId="NumberComparisonOperator" sequenceNum="3"/>
+    <moqui.basic.Enumeration description="Less Than or Equals" enumId="NUM_LESS_THAN_EQUALS" enumTypeId="NumberComparisonOperator" sequenceNum="4"/>
+    <moqui.basic.Enumeration description="Greater Than" enumId="NUM_GREATER_THAN" enumTypeId="NumberComparisonOperator" sequenceNum="5"/>
+    <moqui.basic.Enumeration description="Greater Than or Equals" enumId="NUM_GREATER_THAN_EQUALS" enumTypeId="NumberComparisonOperator" sequenceNum="6"/>
+
+    <!-- Date comparison operator -->
+    <moqui.basic.EnumerationType description="Date Comparison Operator" enumTypeId="DateComparisonOperator"/>
+    <moqui.basic.Enumeration description="Equals" enumId="DATE_EQUALS" enumTypeId="DateComparisonOperator" sequenceNum="1"/>
+    <moqui.basic.Enumeration description="Not Equals" enumId="DATE_NOT_EQUALS" enumTypeId="DateComparisonOperator" sequenceNum="2"/>
+    <moqui.basic.Enumeration description="Before" enumId="DATE_BEFORE" enumTypeId="DateComparisonOperator" sequenceNum="3"/>
+    <moqui.basic.Enumeration description="After" enumId="DATE_AFTER" enumTypeId="DateComparisonOperator" sequenceNum="4"/>
+
+    <!-- Boolean comparison operator -->
+    <moqui.basic.EnumerationType description="Boolean Comparison Operator" enumTypeId="BooleanComparisonOperator"/>
+    <moqui.basic.Enumeration description="True" enumId="BOOL_TRUE" enumTypeId="BooleanComparisonOperator" sequenceNum="1"/>
+    <moqui.basic.Enumeration description="False" enumId="BOOL_FALSE" enumTypeId="BooleanComparisonOperator" sequenceNum="2"/>
+
+    <!-- Data feeds -->
+    <moqui.entity.feed.DataFeed dataFeedId="WorkflowSearch" dataFeedTypeEnumId="DTFDTP_RT_PUSH" indexOnStartEmpty="Y" feedName="Workflow Search" feedReceiveServiceName="org.moqui.search.SearchServices.index#DataDocuments"/>
+
+</entity-facade-xml>

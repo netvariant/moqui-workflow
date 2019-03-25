@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
+
+    <!-- Entity field -->
+    <entity entity-name="EntityField" package="moqui.entity">
+        <description>
+            While we can use the EntityFacade to access ALL entity fields, this entity provides a convenient way to access entity fields we wish to expose to the application users. This is particularly useful in search and condition fields.
+        </description>
+
+        <field name="fieldId" type="id" is-pk="true"/>
+        <field name="entityName" type="text-medium"/>
+        <field name="fieldName" type="text-medium"/>
+        <field name="fieldTypeEnumId" type="id"/>
+        <field name="displayName" type="text-medium"/>
+        <field name="creationDate" type="date-time" default="ec.user.nowTimestamp"/>
+
+        <relationship type="one" title="EntityFieldType" related="moqui.basic.Enumeration" short-alias="fieldType">
+            <key-map field-name="fieldTypeEnumId"/>
+        </relationship>
+
+        <index name="uniqueEntityFieldIdx" unique="true">
+            <index-field name="entityName"/>
+            <index-field name="fieldName"/>
+        </index>
+    </entity>
+
+</entities>

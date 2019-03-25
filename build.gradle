@@ -1,0 +1,87 @@
+plugins {
+    id 'java'
+    id 'groovy'
+}
+
+group 'org.moqui.workflow'
+version '1.0.0'
+description 'Moqui Workflow'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+def jarBaseName = 'moqui-workflow'
+def moquiDir = projectDir.parentFile.parentFile.parentFile
+def frameworkDir = file(moquiDir.absolutePath + '/framework')
+def libDir = projectDir.absolutePath + '/lib'
+
+repositories {
+    flatDir name: 'frameworkLib', dirs: frameworkDir.absolutePath + '/lib'
+    flatDir name: 'projectLib', dirs: projectDir.absolutePath + '/lib'
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            project(':framework'),
+            project(':runtime:component:moqui-elasticsearch'),
+            // Apache Commons
+            'org.apache.commons:commons-lang3:3.8',
+            // JSON
+            'org.json:json:20180813'
+    )
+    testCompile(
+            project(':framework').configurations.testCompile.allDependencies
+    )
+}
+
+// Log4j has annotation processors, disable to avoid warning
+tasks.withType(JavaCompile) { options.compilerArgs << "-proc:none" }
+tasks.withType(GroovyCompile) { options.compilerArgs << "-proc:none" }
+
+// by default the Java plugin runs test on build, change to not do that (only run test if explicit task)
+check.dependsOn.clear()
+
+task cleanLib(type: Delete) {
+    delete fileTree(dir: libDir, include: '*')
+}
+clean.dependsOn cleanLib
+
+task copyDependencies {
+    doLast {
+        copy {
+            from (configurations.runtime
+                    - project(':framework').configurations.runtime
+                    - project(':runtime:component:moqui-workflow').configurations.runtime
+                    - project(':runtime:component:moqui-workflow').jar.archivePath
+            )
+            into file(libDir)
+        }
+    }
+}
+copyDependencies.dependsOn cleanLib
+
+test {
+    dependsOn cleanTest
+    include '**/MoquiWorkflowSuite.class'
+
+    systemProperty 'moqui.runtime', moquiDir.absolutePath + '/runtime'
+    systemProperty 'moqui.conf', 'conf/MoquiDevConf.xml'
+    systemProperty 'moqui.init.static', 'true'
+
+    // show standard out and standard error of the test JVM(s) on the console
+    testLogging.showStandardStreams = true
+    testLogging.showExceptions = true
+
+    classpath += files(sourceSets.main.output.classesDirs)
+    // filter out classpath entries that don't exist (gradle adds a bunch of these), or ElasticSearch JarHell will blow up
+    classpath = classpath.filter { it.exists() }
+
+    beforeTest { descriptor -> logger.lifecycle("Running test: ${descriptor}") }
+}
+
+jar {
+    destinationDir = file(libDir)
+    baseName = jarBaseName
+}
+jar.dependsOn copyDependencies

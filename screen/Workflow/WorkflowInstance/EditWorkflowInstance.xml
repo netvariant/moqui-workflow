@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
+        default-menu-title="Instance"
+        default-menu-index="1">
+
+    <parameter name="instanceId" required="true"/>
+
+    <transition name="findInstance">
+        <default-response url="../FindWorkflowInstance"/>
+    </transition>
+    <transition name="startInstance">
+        <service-call name="org.moqui.workflow.WorkflowServices.start#WorkflowInstance"/>
+        <default-response url="."/>
+    </transition>
+    <transition name="suspendInstance">
+        <service-call name="org.moqui.workflow.WorkflowServices.suspend#WorkflowInstance"/>
+        <default-response url="."/>
+    </transition>
+    <transition name="resumeInstance">
+        <service-call name="org.moqui.workflow.WorkflowServices.resume#WorkflowInstance"/>
+        <default-response url="."/>
+    </transition>
+    <transition name="abortInstance">
+        <service-call name="org.moqui.workflow.WorkflowServices.abort#WorkflowInstance"/>
+        <default-response url="."/>
+    </transition>
+
+    <actions>
+        <entity-find-one entity-name="moqui.workflow.WorkflowInstanceDetail" value-field="instance"/>
+    </actions>
+
+    <widgets>
+        <section name="UpdateInstanceSection" condition="instance">
+            <widgets>
+                <container-panel>
+                    <panel-header>
+                        <link url="findInstance" text="Find Instance" icon="glyphicon glyphicon-search"/>
+                        <section name="ResumeInstance" condition="instance.statusId == 'WF_INST_STAT_SUSPEND'">
+                            <widgets>
+                                <link url="resumeInstance" text="Resume" icon="glyphicon glyphicon-play" style="btn-success" confirmation="Are you sure you want to resume this instance?"/>
+                            </widgets>
+                        </section>
+                        <section name="StartInstance" condition="instance.statusId == 'WF_INST_STAT_PEND' || instance.statusId == 'WF_INST_STAT_ACTIVE'">
+                            <widgets>
+                                <link url="startInstance" text="Start" icon="glyphicon glyphicon-play" style="btn-success" confirmation="Are you sure you want to start this instance?"/>
+                                <link url="suspendInstance" text="Suspend" icon="glyphicon glyphicon-pause" style="btn-warning" confirmation="Are you sure you want to suspend this instance?"/>
+                                <link url="abortInstance" text="Abort" icon="glyphicon glyphicon-stop" style="btn-danger" confirmation="Are you sure you want to abort this instance?"/>
+                            </widgets>
+                        </section>
+                    </panel-header>
+                    <panel-center>
+                        <form-single name="UpdateInstanceForm" transition="updateInstance" map="instance">
+                            <auto-fields-entity entity-name="moqui.workflow.WorkflowInstanceDetail" field-type="display">
+                                <exclude field-name="workflowTypeId"/>
+                                <exclude field-name="actionTypeEnumId"/>
+                                <exclude field-name="activityTypeEnumId"/>
+                                <exclude field-name="statusId"/>
+                                <exclude field-name="primaryViewEntityName"/>
+                                <exclude field-name="inputUserId"/>
+                                <exclude field-name="semaphore"/>
+                            </auto-fields-entity>
+                            <field name="instanceId">
+                                <default-field title="ID">
+                                    <display/>
+                                </default-field>
+                            </field>
+                            <field name="workflowId">
+                                <default-field title="Workflow ID">
+                                    <display/>
+                                </default-field>
+                            </field>
+                            <field name="workflowName">
+                                <default-field title="Workflow Name">
+                                    <display/>
+                                </default-field>
+                            </field>
+                            <field name="workflowTypeName">
+                                <default-field title="Workflow Type">
+                                    <display/>
+                                </default-field>
+                            </field>
+                            <field name="actionTypeDescription">
+                                <default-field title="Action Type">
+                                    <display/>
+                                </default-field>
+                            </field>
+                            <field name="activityTypeDescription">
+                                <default-field title="Activity Type">
+                                    <display/>
+                                </default-field>
+                            </field>
+                            <field name="statusDescription">
+                                <default-field title="Status">
+                                    <display/>
+                                </default-field>
+                            </field>
+                            <field name="inputUserFullName">
+                                <default-field title="Input User">
+                                    <display/>
+                                </default-field>
+                            </field>
+
+                            <field-layout>
+                                <field-ref name="instanceId"/>
+                                <field-ref name="workflowId"/>
+                                <field-ref name="workflowName"/>
+                                <field-ref name="workflowTypeName"/>
+                                <field-ref name="workflowDescription"/>
+                                <field-ref name="workflowDisabled"/>
+                                <field-ref name="actionTypeDescription"/>
+                                <field-ref name="primaryEntityName"/>
+                                <field-ref name="primaryKeyValue"/>
+                                <field-ref name="activityId"/>
+                                <field-ref name="activityTypeDescription"/>
+                                <field-ref name="activityExecuted"/>
+                                <field-ref name="statusDescription"/>
+                                <field-ref name="resultCode"/>
+                                <field-ref name="inputUserFullName"/>
+                                <field-ref name="reminderCount"/>
+                                <field-ref name="lastReminderDate"/>
+                                <field-ref name="timeoutDate"/>
+                                <field-ref name="lastUpdateDate"/>
+                                <fields-not-referenced/>
+                            </field-layout>
+                        </form-single>
+                    </panel-center>
+                </container-panel>
+            </widgets>
+            <fail-widgets>
+                <container style="alert alert-warning">
+                    <label text="Workflow instance with ID [${instanceId}] was not found."/>
+                </container>
+            </fail-widgets>
+        </section>
+    </widgets>
+</screen>

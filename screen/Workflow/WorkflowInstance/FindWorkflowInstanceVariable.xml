@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns=""
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
+        default-menu-title="Variables"
+        default-menu-index="2">
+
+    <parameter name="instanceId" required="true"/>
+
+    <actions>
+        <entity-find entity-name="moqui.workflow.WorkflowInstanceVariableDetail" list="variableList">
+            <search-form-inputs default-order-by="variableName"/>
+        </entity-find>
+    </actions>
+
+    <widgets>
+        <container-box>
+            <box-header>
+                <label text="Find Variable" type="h5"/>
+            </box-header>
+            <box-body>
+                <form-list name="ListVariables" list="variableList" skip-form="true" header-dialog="true" select-columns="true">
+                    <field name="instanceId">
+                        <header-field>
+                            <hidden/>
+                        </header-field>
+                    </field>
+                    <field name="variableId">
+                        <header-field>
+                            <hidden/>
+                        </header-field>
+                    </field>
+                    <field name="variableTypeEnumId">
+                        <header-field show-order-by="true" title="Variable Type">
+                            <drop-down allow-empty="true">
+                                <entity-options text="${description}" key="${enumId}">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="WorkflowVariableType"/>
+                                        <order-by field-name="sequenceNum,description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </header-field>
+                        <default-field>
+                            <display text="${variableTypeDescription}"/>
+                        </default-field>
+                    </field>
+                    <field name="variableName">
+                        <header-field show-order-by="true">
+                            <text-find hide-options="true"/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="defaultValue">
+                        <header-field show-order-by="true">
+                            <text-find hide-options="true"/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="definedValue">
+                        <header-field show-order-by="true">
+                            <text-find hide-options="true"/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="find">
+                        <header-field title="Find">
+                            <submit icon="glyphicon glyphicon-search"/>
+                        </header-field>
+                    </field>
+
+                    <form-list-column>
+                        <field-ref name="instanceId"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="variableId"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="variableTypeEnumId"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="variableName"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="defaultValue"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="definedValue"/>
+                    </form-list-column>
+                </form-list>
+            </box-body>
+        </container-box>
+    </widgets>
+</screen>

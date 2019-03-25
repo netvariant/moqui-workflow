@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml>
+
+    <!-- Email types -->
+    <moqui.basic.Enumeration enumId="EMT_WF_REMINDER" description="Workflow Reminder" enumTypeId="EmailType"/>
+    <moqui.basic.Enumeration enumId="EMT_WF_EMAIL" description="Workflow Email" enumTypeId="EmailType"/>
+    <moqui.basic.Enumeration enumId="EMT_WF_TASK" description="Workflow Task" enumTypeId="EmailType"/>
+
+</entity-facade-xml>

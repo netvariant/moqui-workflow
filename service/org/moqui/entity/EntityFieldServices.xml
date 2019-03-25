@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-2.1.xsd">
+
+    <!-- Field comparison operator -->
+    <service verb="find" noun="FieldComparisonOperator" type="java" location="org.moqui.entity.EntityFieldService" method="findFieldComparisonOperators">
+        <in-parameters>
+            <parameter name="fieldId"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="operatorList" type="List">
+                <parameter name="operator" type="Map">
+                    <auto-parameters entity-name="moqui.basic.Enumeration"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+
+</services>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
+        default-menu-title="Find Instance"
+        default-menu-include="false">
+
+    <transition name="editInstance">
+        <default-response url="../EditWorkflowInstance"/>
+    </transition>
+
+    <actions>
+        <entity-find entity-name="moqui.workflow.WorkflowInstanceDetail" list="instanceList">
+            <search-form-inputs default-order-by="^instanceId"/>
+        </entity-find>
+    </actions>
+
+    <widgets>
+        <container-box>
+            <box-header>
+                <label text="Find Instance" type="h5"/>
+            </box-header>
+            <box-body>
+                <form-list name="ListInstances" list="instanceList" skip-form="true" header-dialog="true" select-columns="true">
+                    <field name="instanceId">
+                        <header-field show-order-by="true" title="ID">
+                            <text-find hide-options="true" size="10"/>
+                        </header-field>
+                        <default-field>
+                            <link url="editInstance" text="${instanceId}"/>
+                        </default-field>
+                    </field>
+                    <field name="workflowName">
+                        <header-field show-order-by="true">
+                            <text-find hide-options="true"/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="workflowTypeId">
+                        <header-field show-order-by="true" title="Workflow Type">
+                            <drop-down allow-empty="true">
+                                <entity-options text="${typeName}" key="${typeId}">
+                                    <entity-find entity-name="moqui.workflow.WorkflowType">
+                                        <order-by field-name="workflowId"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </header-field>
+                        <default-field>
+                            <display text="${workflowTypeName}"/>
+                        </default-field>
+                    </field>
+                    <field name="actionTypeEnumId">
+                        <header-field show-order-by="true" title="Action Type">
+                            <drop-down allow-empty="true">
+                                <entity-options text="${description}" key="${enumId}">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="WorkflowActionType"/>
+                                        <order-by field-name="sequenceNum,description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </header-field>
+                        <default-field>
+                            <display text="${actionTypeDescription}"/>
+                        </default-field>
+                    </field>
+                    <field name="activityTypeEnumId">
+                        <header-field show-order-by="true" title="Activity Type">
+                            <drop-down allow-empty="true">
+                                <entity-options text="${description}" key="${enumId}">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="WorkflowActivityType"/>
+                                        <order-by field-name="sequenceNum,description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </header-field>
+                        <default-field>
+                            <display text="${activityTypeDescription}"/>
+                        </default-field>
+                    </field>
+                    <field name="statusId">
+                        <header-field show-order-by="true" title="Status">
+                            <drop-down allow-empty="true">
+                                <entity-options text="${description}" key="${statusId}">
+                                    <entity-find entity-name="moqui.basic.StatusItem">
+                                        <econdition field-name="statusTypeId" value="WF_INST_STAT"/>
+                                        <order-by field-name="sequenceNum,description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </header-field>
+                        <default-field>
+                            <display text="${statusDescription}"/>
+                        </default-field>
+                    </field>
+                    <field name="activityId">
+                        <header-field show-order-by="true">
+                            <text-find hide-options="true"/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="activityExecuted">
+                        <header-field show-order-by="true">
+                            <drop-down allow-empty="true">
+                                <option key="Y" text="Yes"/>
+                                <option key="N" text="No"/>
+                            </drop-down>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="resultCode">
+                        <header-field show-order-by="true">
+                            <text-find hide-options="true"/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="primaryEntityName">
+                        <header-field show-order-by="true">
+                            <text-find hide-options="true"/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="primaryKeyValue">
+                        <header-field show-order-by="true">
+                            <text-find hide-options="true"/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="creationDate">
+                        <header-field show-order-by="true">
+                            <date-find/>
+                        </header-field>
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="find">
+                        <header-field title="Find">
+                            <submit icon="glyphicon glyphicon-search"/>
+                        </header-field>
+                    </field>
+
+                    <form-list-column>
+                        <field-ref name="instanceId"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="workflowName"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="workflowTypeId"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="actionTypeEnumId"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="activityTypeEnumId"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="statusId"/>
+                    </form-list-column>
+                    <form-list-column>
+                        <field-ref name="creationDate"/>
+                    </form-list-column>
+                </form-list>
+            </box-body>
+        </container-box>
+    </widgets>
+</screen>

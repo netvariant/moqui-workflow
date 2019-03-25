@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-2.1.xsd">
+
+    <!-- Workflow -->
+    <service verb="find" noun="Workflow" type="java" location="org.moqui.workflow.WorkflowService" method="findWorkflows">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.workflow.WorkflowDetail"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="workflowList" type="List">
+                <parameter name="workflow" type="Map">
+                    <auto-parameters entity-name="moqui.workflow.WorkflowDetail"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+    <service verb="create" noun="Workflow" type="java" location="org.moqui.workflow.WorkflowService" method="createWorkflow">
+        <in-parameters>
+            <parameter name="workflowTypeId"/>
+            <parameter name="statusFlowId"/>
+            <parameter name="launchTypeEnumId"/>
+            <parameter name="workflowName"/>
+            <parameter name="description"/>
+            <parameter name="reminderInterval" type="Integer"/>
+            <parameter name="reminderIntervalUomId"/>
+            <parameter name="reminderLimit" type="Integer"/>
+            <parameter name="disabled"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="workflowId"/>
+        </out-parameters>
+    </service>
+    <service verb="update" noun="Workflow" type="java" location="org.moqui.workflow.WorkflowService" method="updateWorkflow">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="workflowName"/>
+            <parameter name="description"/>
+            <parameter name="reminderInterval" type="Integer"/>
+            <parameter name="reminderIntervalUomId"/>
+            <parameter name="reminderLimit" type="Integer"/>
+            <parameter name="disabled"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="workflowId"/>
+        </out-parameters>
+    </service>
+    <service verb="design" noun="Workflow" type="java" location="org.moqui.workflow.WorkflowService" method="designWorkflow">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="modelData"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="workflowId"/>
+        </out-parameters>
+    </service>
+    <service verb="disable" noun="Workflow" type="java" location="org.moqui.workflow.WorkflowService" method="disableWorkflow">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="disabled"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="workflowId"/>
+        </out-parameters>
+    </service>
+    <service verb="find" noun="WorkflowVariable" type="java" location="org.moqui.workflow.WorkflowService" method="findWorkflowVariables">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="workflowVariableList" type="List">
+                <parameter name="workflowVariable" type="Map">
+                    <auto-parameters entity-name="moqui.workflow.WorkflowVariableDetail"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+    <service verb="create" noun="WorkflowVariable" type="java" location="org.moqui.workflow.WorkflowService" method="createWorkflowVariable">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="variableTypeEnumId"/>
+            <parameter name="variableName"/>
+            <parameter name="description"/>
+            <parameter name="defaultValue"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="variableId"/>
+        </out-parameters>
+    </service>
+    <service verb="find" noun="WorkflowInitiator" type="java" location="org.moqui.workflow.WorkflowService" method="findWorkflowInitiators">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="workflowInitiatorList" type="List">
+                <parameter name="workflowInitiator" type="Map">
+                    <auto-parameters entity-name="moqui.workflow.WorkflowInitiatorDetail"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+    <service verb="create" noun="WorkflowInitiator" type="java" location="org.moqui.workflow.WorkflowService" method="createWorkflowInitiator">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="userGroupId"/>
+            <parameter name="fromDate"/>
+            <parameter name="toDate"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="initiatorId"/>
+        </out-parameters>
+    </service>
+    <service verb="expire" noun="WorkflowInitiator" type="java" location="org.moqui.workflow.WorkflowService" method="expireWorkflowInitiator">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="initiatorId"/>
+        </in-parameters>
+    </service>
+
+    <!-- Workflow instance -->
+    <service verb="create" noun="WorkflowInstance" type="java" location="org.moqui.workflow.WorkflowService" method="createWorkflowInstance">
+        <in-parameters>
+            <parameter name="workflowId"/>
+            <parameter name="primaryKeyValue"/>
+            <parameter name="actionTypeEnumId"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="instanceId"/>
+        </out-parameters>
+    </service>
+    <service verb="start" noun="WorkflowInstance" type="java" location="org.moqui.workflow.WorkflowService" method="startWorkflowInstance" authenticate="false">
+        <in-parameters>
+            <parameter name="instanceId"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="instanceId"/>
+        </out-parameters>
+    </service>
+    <service verb="start" noun="ElapsedWorkflowInstances" type="java" location="org.moqui.workflow.WorkflowService" method="startElapsedWorkflowInstances" authenticate="false"/>
+    <service verb="abort" noun="WorkflowInstance" type="java" location="org.moqui.workflow.WorkflowService" method="abortWorkflowInstance">
+        <in-parameters>
+            <parameter name="instanceId"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="instanceId"/>
+        </out-parameters>
+    </service>
+    <service verb="suspend" noun="WorkflowInstance" type="java" location="org.moqui.workflow.WorkflowService" method="suspendWorkflowInstance">
+        <in-parameters>
+            <parameter name="instanceId"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="instanceId"/>
+        </out-parameters>
+    </service>
+    <service verb="resume" noun="WorkflowInstance" type="java" location="org.moqui.workflow.WorkflowService" method="resumeWorkflowInstance">
+        <in-parameters>
+            <parameter name="instanceId"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="instanceId"/>
+        </out-parameters>
+    </service>
+    <service verb="update" noun="WorkflowInstanceVariable" type="java" location="org.moqui.workflow.WorkflowService" method="updateWorkflowInstanceVariable">
+        <in-parameters>
+            <parameter name="instanceId"/>
+            <parameter name="variableId"/>
+            <parameter name="valueExpression"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="variableId"/>
+            <parameter name="definedValue"/>
+        </out-parameters>
+    </service>
+    <service verb="find" noun="WorkflowInstanceTask" type="java" location="org.moqui.workflow.WorkflowService" method="findWorkflowInstanceTasks">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.workflow.WorkflowInstanceTaskDetail"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="taskList" type="List">
+                <parameter name="task" type="Map">
+                    <auto-parameters entity-name="moqui.workflow.WorkflowInstanceTaskDetail"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+    <service verb="count" noun="WorkflowInstanceTask" type="java" location="org.moqui.workflow.WorkflowService" method="countWorkflowInstanceTasks">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.workflow.WorkflowInstanceTaskDetail"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+        </out-parameters>
+    </service>
+    <service verb="update" noun="WorkflowInstanceTask" type="java" location="org.moqui.workflow.WorkflowService" method="updateWorkflowInstanceTask">
+        <in-parameters>
+            <parameter name="taskId"/>
+            <parameter name="statusId"/>
+            <parameter name="definedValue"/>
+            <parameter name="remark"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="taskId"/>
+        </out-parameters>
+    </service>
+
+</services>

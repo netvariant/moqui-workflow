@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
+
+    <!-- Entity field -->
+    <view-entity entity-name="EntityFieldDetail" package="moqui.entity">
+        <member-entity entity-alias="entityField" entity-name="moqui.entity.EntityField"/>
+        <member-entity entity-alias="fieldType" entity-name="moqui.basic.Enumeration" join-from-alias="entityField">
+            <key-map field-name="fieldTypeEnumId"/>
+        </member-entity>
+
+        <alias-all entity-alias="entityField"/>
+        <alias name="fieldTypeDescription" entity-alias="fieldType" field="description"/>
+    </view-entity>
+
+</entities>

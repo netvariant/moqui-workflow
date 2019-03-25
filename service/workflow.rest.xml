@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/rest-api-2.1.xsd"
+          name="moqui-workflow"
+          displayName="Moqui Workflow REST API"
+          description="APIs for the Moqui workflow engine"
+          version="1.0.0">
+
+    <resource name="basic" description="Basic API" version="1.0.0" require-authentication="anonymous-all">
+        <resource name="enum">
+            <method type="get">
+                <entity name="moqui.basic.Enumeration" operation="list"/>
+            </method>
+        </resource>
+        <resource name="uom">
+            <method type="get">
+                <entity name="moqui.basic.Uom" operation="list"/>
+            </method>
+        </resource>
+        <resource name="geo">
+            <method type="get">
+                <entity name="moqui.basic.Geo" operation="list"/>
+            </method>
+        </resource>
+        <resource name="statusItem">
+            <method type="get">
+                <entity name="moqui.basic.StatusFlowItem" operation="list"/>
+            </method>
+        </resource>
+    </resource>
+
+    <resource name="entity" description="Entity API" version="1.0.0" require-authentication="anonymous-all">
+        <resource name="field" description="Find entity fields">
+            <method type="get">
+                <entity name="moqui.entity.EntityFieldDetail" operation="list"/>
+            </method>
+        </resource>
+    </resource>
+
+    <resource name="workflow" description="Workflow API" version="1.0.0">
+        <method type="get">
+            <service name="org.moqui.workflow.WorkflowServices.find#Workflow"/>
+        </method>
+        <method type="post">
+            <service name="org.moqui.workflow.WorkflowServices.create#Workflow"/>
+        </method>
+        <method type="patch">
+            <service name="org.moqui.workflow.WorkflowServices.update#Workflow"/>
+        </method>
+        <id name="workflowId">
+            <resource name="design">
+                <method type="post">
+                    <service name="org.moqui.workflow.WorkflowServices.design#Workflow"/>
+                </method>
+            </resource>
+            <resource name="variable">
+                <method type="get">
+                    <service name="org.moqui.workflow.WorkflowServices.find#WorkflowVariable"/>
+                </method>
+                <method type="post">
+                    <service name="org.moqui.workflow.WorkflowServices.create#WorkflowVariable"/>
+                </method>
+            </resource>
+            <resource name="initiator">
+                <method type="get">
+                    <service name="org.moqui.workflow.WorkflowServices.find#WorkflowInitiator"/>
+                </method>
+                <method type="post">
+                    <service name="org.moqui.workflow.WorkflowServices.create#WorkflowInitiator"/>
+                </method>
+                <method type="delete">
+                    <service name="org.moqui.workflow.WorkflowServices.expire#WorkflowInitiator"/>
+                </method>
+            </resource>
+        </id>
+        <resource name="task">
+            <method type="get">
+                <service name="org.moqui.workflow.WorkflowServices.find#WorkflowInstanceTask"/>
+            </method>
+            <method type="patch">
+                <service name="org.moqui.workflow.WorkflowServices.update#WorkflowInstanceTask"/>
+            </method>
+            <resource name="count">
+                <method type="get">
+                    <service name="org.moqui.workflow.WorkflowServices.count#WorkflowInstanceTask"/>
+                </method>
+            </resource>
+        </resource>
+    </resource>
+
+</resource>
