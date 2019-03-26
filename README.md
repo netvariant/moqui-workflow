@@ -28,12 +28,21 @@ $ git clone https://github.com/moqui/moqui-framework.git
 
 ### Download the myaddons.xml file
 
-Download the [myaddons.xml](myaddons.xml) file and copy it to the Moqui Framework root directory. If you're using a unix-based environment you can do this quickly using these commands:
+Download using **wget**:
 
 ```shell
 $ cd moqui-framework
 $ wget https://raw.githubusercontent.com/netvariant/moqui-workflow/master/myaddons.xml
 ```
+
+Download using **curl**:
+
+```shell
+$ cd moqui-framework
+$ curl -O https://raw.githubusercontent.com/netvariant/moqui-workflow/master/myaddons.xml
+```
+
+If neither command is available then download [myaddons.xml](myaddons.xml) file manually and copy it to the Moqui Framework root directory.
 
 ### Download the workflow component
 
