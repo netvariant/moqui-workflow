@@ -52,7 +52,7 @@ task copyDependencies {
         copy {
             from (configurations.runtime
                     - project(':framework').configurations.runtime
-                    - project(':runtime:component:moqui-workflow').configurations.runtime
+                    - project(':runtime:component:moqui-elasticsearch').configurations.runtime
                     - project(':runtime:component:moqui-workflow').jar.archivePath
             )
             into file(libDir)

@@ -36,4 +36,21 @@
     <!-- Data feeds -->
     <moqui.entity.feed.DataFeed dataFeedId="WorkflowSearch" dataFeedTypeEnumId="DTFDTP_RT_PUSH" indexOnStartEmpty="Y" feedName="Workflow Search" feedReceiveServiceName="org.moqui.search.SearchServices.index#DataDocuments"/>
 
+    <!-- Data documents -->
+    <dataDocuments dataDocumentId="MoquiStatusItem" documentName="Status Item" documentTitle="${description}" indexName="workflow" primaryEntityName="moqui.basic.StatusItem">
+        <fields fieldSeqId="01" fieldPath="statusId"/>
+        <fields fieldSeqId="02" fieldPath="statusCode"/>
+        <fields fieldSeqId="03" fieldPath="description"/>
+        <fields fieldSeqId="04" fieldPath="type:description" fieldNameAlias="statusTypeDescription"/>
+
+        <feeds dataFeedId="WorkflowSearch"/>
+    </dataDocuments>
+    <dataDocuments dataDocumentId="MoquiStatusFlow" documentName="Status Flow" documentTitle="${description}" indexName="workflow" primaryEntityName="moqui.basic.StatusFlow">
+        <fields fieldSeqId="01" fieldPath="statusFlowId"/>
+        <fields fieldSeqId="02" fieldPath="description"/>
+        <fields fieldSeqId="03" fieldPath="type:description" fieldNameAlias="statusTypeDescription"/>
+
+        <feeds dataFeedId="WorkflowSearch"/>
+    </dataDocuments>
+
 </entity-facade-xml>

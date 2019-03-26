@@ -93,7 +93,7 @@ You may not wish to expose all entity fields in the workflow designer. You can c
 You can define a new workflow type in your component seed data as follows:
 
 ```xml
-<commons.entity.EntityField entityName="moqui.example.Example" fieldTypeEnumId="ENTITY_FLD_TEXT" fieldName="exampleName" displayName="Example Name"/>
+<moqui.entity.EntityField entityName="moqui.example.Example" fieldTypeEnumId="ENTITY_FLD_TEXT" fieldName="exampleName" displayName="Example Name"/>
 ```
 
 ### Design a workflow

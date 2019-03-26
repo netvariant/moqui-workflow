@@ -589,7 +589,7 @@ public class WorkflowService {
         if (StringUtil.isValidElasticsearchQuery(filter)) {
             Map<String, Object> resp = sf.sync().name("org.moqui.search.SearchServices.search#DataDocuments")
                     .parameter("indexName", "workflow")
-                    .parameter("documentType", "Workflow")
+                    .parameter("documentType", "MoquiWorkflow")
                     .parameter("queryString", filter)
                     .call();
 
@@ -996,7 +996,7 @@ public class WorkflowService {
         if (StringUtil.isValidElasticsearchQuery(filter)) {
             Map<String, Object> resp = sf.sync().name("org.moqui.search.SearchServices.search#DataDocuments")
                     .parameter("indexName", "workflow")
-                    .parameter("documentType", "WorkflowInitiator")
+                    .parameter("documentType", "MoquiWorkflowInitiator")
                     .parameter("queryString", filter)
                     .call();
 
@@ -1266,7 +1266,7 @@ public class WorkflowService {
         if (StringUtil.isValidElasticsearchQuery(filter)) {
             Map<String, Object> resp = sf.sync().name("org.moqui.search.SearchServices.search#DataDocuments")
                     .parameter("indexName", "workflow")
-                    .parameter("documentType", "WorkflowVariable")
+                    .parameter("documentType", "MoquiWorkflowVariable")
                     .parameter("queryString", String.format("workflowId:%s AND %s", workflowId, filter))
                     .call();
 
@@ -1435,7 +1435,7 @@ public class WorkflowService {
         }
 
         // validate the workflow
-        EntityValue workflow = ef.find("moqui.workflow.Workflow")
+        EntityValue workflow = ef.find("moqui.workflow.WorkflowDetail")
                 .condition("workflowId", workflowId)
                 .one();
         if (workflow == null) {
@@ -2019,7 +2019,7 @@ public class WorkflowService {
 
         // validate the workflow
         String workflowId = instance.getString("workflowId");
-        EntityValue workflow = ef.find("moqui.workflow.Workflow")
+        EntityValue workflow = ef.find("moqui.workflow.WorkflowDetail")
                 .condition("workflowId", workflowId)
                 .one();
         if (workflow == null) {
@@ -2129,7 +2129,7 @@ public class WorkflowService {
 
         // validate the workflow
         String workflowId = instance.getString("workflowId");
-        EntityValue workflow = ef.find("moqui.workflow.Workflow")
+        EntityValue workflow = ef.find("moqui.workflow.WorkflowDetail")
                 .condition("workflowId", workflowId)
                 .one();
         if (workflow == null) {
@@ -2239,7 +2239,7 @@ public class WorkflowService {
 
         // validate the workflow
         String workflowId = instance.getString("workflowId");
-        EntityValue workflow = ef.find("moqui.workflow.Workflow")
+        EntityValue workflow = ef.find("moqui.workflow.WorkflowDetail")
                 .condition("workflowId", workflowId)
                 .one();
         if (workflow == null) {
@@ -2442,7 +2442,7 @@ public class WorkflowService {
         if (StringUtil.isValidElasticsearchQuery(filter)) {
             Map<String, Object> resp = sf.sync().name("org.moqui.search.SearchServices.search#DataDocuments")
                     .parameter("indexName", "workflow")
-                    .parameter("documentType", "WorkflowInstanceTask")
+                    .parameter("documentType", "MoquiWorkflowInstanceTask")
                     .parameter("queryString", filter)
                     .call();
 
@@ -2528,7 +2528,7 @@ public class WorkflowService {
         if (StringUtil.isValidElasticsearchQuery(filter)) {
             Map<String, Object> resp = sf.sync().name("org.moqui.search.SearchServices.search#DataDocuments")
                     .parameter("indexName", "workflow")
-                    .parameter("documentType", "WorkflowInstanceTask")
+                    .parameter("documentType", "MoquiWorkflowInstanceTask")
                     .parameter("queryString", filter)
                     .call();
 

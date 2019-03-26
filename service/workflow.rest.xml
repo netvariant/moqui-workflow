@@ -22,15 +22,29 @@
                 <entity name="moqui.basic.Geo" operation="list"/>
             </method>
         </resource>
-        <resource name="statusFlow">
-            <method type="get">
-                <entity name="moqui.basic.StatusFlowItem" operation="list"/>
-            </method>
-        </resource>
-        <resource name="statusItem">
-            <method type="get">
-                <entity name="moqui.basic.StatusFlowItem" operation="list"/>
-            </method>
+        <resource name="status">
+            <resource name="item">
+                <method type="get">
+                    <service name="org.moqui.basic.BasicServices.find#StatusItem"/>
+                </method>
+            </resource>
+            <resource name="flow">
+                <method type="get">
+                    <service name="org.moqui.basic.BasicServices.find#StatusFlow"/>
+                </method>
+                <id name="statusFlowId">
+                    <resource name="item">
+                        <method type="get">
+                            <service name="org.moqui.basic.BasicServices.find#StatusFlowItem"/>
+                        </method>
+                    </resource>
+                    <resource name="transition">
+                        <method type="get">
+                            <service name="org.moqui.basic.BasicServices.find#StatusFlowTransition"/>
+                        </method>
+                    </resource>
+                </id>
+            </resource>
         </resource>
     </resource>
 

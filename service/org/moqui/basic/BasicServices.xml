@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-2.1.xsd">
+
+    <!-- Status item -->
+    <service verb="find" noun="StatusItem" type="java" location="org.moqui.basic.StatusItemService" method="findStatusItems">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.basic.StatusItem"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="statusItemList" type="List">
+                <parameter name="statusItem" type="Map">
+                    <auto-parameters entity-name="moqui.basic.StatusItem"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+
+    <!-- Status flow -->
+    <service verb="find" noun="StatusFlow" type="java" location="org.moqui.basic.StatusFlowService" method="findStatusFlows">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.basic.StatusFlow"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="statusFlowList" type="List">
+                <parameter name="statusFlow" type="Map">
+                    <auto-parameters entity-name="moqui.basic.StatusFlow"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+    <service verb="find" noun="StatusFlowItem" type="java" location="org.moqui.basic.StatusFlowService" method="findStatusFlowItems">
+        <in-parameters>
+            <parameter name="statusFlowId"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="statusItemList" type="List">
+                <parameter name="statusItem" type="Map">
+                    <auto-parameters entity-name="moqui.basic.StatusFlowItemDetail"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+    <service verb="find" noun="StatusFlowTransition" type="java" location="org.moqui.basic.StatusFlowService" method="findStatusFlowTransitions">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.basic.StatusFlowTransition"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="transitionList" type="List">
+                <parameter name="transition" type="Map">
+                    <auto-parameters entity-name="moqui.basic.StatusFlowTransition"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+
+</services>

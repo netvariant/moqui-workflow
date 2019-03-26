@@ -2,7 +2,7 @@
 <entity-facade-xml type="seed">
 
     <!-- Data documents -->
-    <dataDocuments dataDocumentId="User" documentName="User" documentTitle="${username}" indexName="workflow" primaryEntityName="moqui.security.UserAccount">
+    <dataDocuments dataDocumentId="MoquiUser" documentName="User" documentTitle="${username}" indexName="workflow" primaryEntityName="moqui.security.UserAccount">
         <fields fieldSeqId="01" fieldPath="userId"/>
         <fields fieldSeqId="02" fieldPath="username"/>
         <fields fieldSeqId="03" fieldPath="userFullName"/>
@@ -11,7 +11,7 @@
 
         <feeds dataFeedId="WorkflowSearch"/>
     </dataDocuments>
-    <dataDocuments dataDocumentId="UserGroup" documentName="User Group" documentTitle="${description}" indexName="workflow" primaryEntityName="moqui.security.UserGroup">
+    <dataDocuments dataDocumentId="MoquiUserGroup" documentName="User Group" documentTitle="${description}" indexName="workflow" primaryEntityName="moqui.security.UserGroup">
         <fields fieldSeqId="01" fieldPath="userGroupId"/>
         <fields fieldSeqId="02" fieldPath="description"/>
 

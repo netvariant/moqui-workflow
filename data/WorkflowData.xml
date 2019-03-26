@@ -121,7 +121,7 @@
     <moqui.basic.StatusFlowTransition statusFlowId="WorkflowInstanceStatusFlow" statusId="WF_INST_STAT_SUSPEND" toStatusId="WF_INST_STAT_ACTIVE" transitionSequence="1" transitionName="Resume"/>
 
     <!-- Data documents -->
-    <dataDocuments dataDocumentId="Workflow" documentName="Workflow" documentTitle="${workflowName}" indexName="workflow" primaryEntityName="moqui.workflow.Workflow">
+    <dataDocuments dataDocumentId="MoquiWorkflow" documentName="Workflow" documentTitle="${workflowName}" indexName="workflow" primaryEntityName="moqui.workflow.Workflow">
         <fields fieldSeqId="01" fieldPath="workflowId"/>
         <fields fieldSeqId="02" fieldPath="workflowName"/>
         <fields fieldSeqId="03" fieldPath="workflowTypeId"/>
@@ -131,7 +131,7 @@
 
         <feeds dataFeedId="WorkflowSearch"/>
     </dataDocuments>
-    <dataDocuments dataDocumentId="WorkflowVariable" documentName="Workflow Variable" documentTitle="${variableName}" indexName="workflow" primaryEntityName="moqui.workflow.WorkflowVariable">
+    <dataDocuments dataDocumentId="MoquiWorkflowVariable" documentName="Workflow Variable" documentTitle="${variableName}" indexName="workflow" primaryEntityName="moqui.workflow.WorkflowVariable">
         <fields fieldSeqId="01" fieldPath="variableId"/>
         <fields fieldSeqId="02" fieldPath="workflowId"/>
         <fields fieldSeqId="03" fieldPath="variableName"/>
@@ -141,7 +141,7 @@
 
         <feeds dataFeedId="WorkflowSearch"/>
     </dataDocuments>
-    <dataDocuments dataDocumentId="WorkflowInitiator" documentName="Workflow Initiator" documentTitle="${initiatorId}" indexName="workflow" primaryEntityName="moqui.workflow.WorkflowInitiator">
+    <dataDocuments dataDocumentId="MoquiWorkflowInitiator" documentName="Workflow Initiator" documentTitle="${initiatorId}" indexName="workflow" primaryEntityName="moqui.workflow.WorkflowInitiator">
         <fields fieldSeqId="01" fieldPath="initiatorId"/>
         <fields fieldSeqId="02" fieldPath="workflowId"/>
         <fields fieldSeqId="03" fieldPath="creationDate"/>
@@ -149,7 +149,7 @@
 
         <feeds dataFeedId="WorkflowSearch"/>
     </dataDocuments>
-    <dataDocuments dataDocumentId="WorkflowInstanceTask" documentName="Workflow Task" documentTitle="${summary}" indexName="workflow" primaryEntityName="moqui.workflow.WorkflowInstanceTask">
+    <dataDocuments dataDocumentId="MoquiWorkflowInstanceTask" documentName="Workflow Task" documentTitle="${summary}" indexName="workflow" primaryEntityName="moqui.workflow.WorkflowInstanceTask">
         <fields fieldSeqId="01" fieldPath="taskId"/>
         <fields fieldSeqId="02" fieldPath="taskTypeEnumId"/>
         <fields fieldSeqId="03" fieldPath="statusId"/>

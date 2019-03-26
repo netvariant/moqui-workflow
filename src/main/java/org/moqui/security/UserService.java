@@ -13,7 +13,6 @@
  */
 package org.moqui.security;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.moqui.context.*;
 import org.moqui.entity.*;
@@ -70,17 +69,13 @@ public class UserService {
 
         // prepare the conditions
         EntityConditionFactory ecf = ef.getConditionFactory();
-        EntityCondition findCondition = ecf.makeCondition(
-                ecf.makeCondition("disabled", EntityCondition.ComparisonOperator.EQUALS, "N"),
-                EntityCondition.JoinOperator.AND,
-                ecf.makeCondition("approved", EntityCondition.ComparisonOperator.EQUALS, "Y")
-        );
+        EntityCondition findCondition = ecf.makeCondition("disabled", EntityCondition.ComparisonOperator.EQUALS, "N");
 
         // add the filter
         if (StringUtil.isValidElasticsearchQuery(filter)) {
             Map<String, Object> resp = sf.sync().name("org.moqui.search.SearchServices.search#DataDocuments")
                     .parameter("indexName", "workflow")
-                    .parameter("documentType", "User")
+                    .parameter("documentType", "MoquiUser")
                     .parameter("queryString", filter)
                     .call();
 
