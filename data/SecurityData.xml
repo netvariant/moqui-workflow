@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml type="seed">
+
+    <!-- Data documents -->
+    <dataDocuments dataDocumentId="User" documentName="User" documentTitle="${username}" indexName="workflow" primaryEntityName="moqui.security.UserAccount">
+        <fields fieldSeqId="01" fieldPath="userId"/>
+        <fields fieldSeqId="02" fieldPath="username"/>
+        <fields fieldSeqId="03" fieldPath="userFullName"/>
+        <fields fieldSeqId="04" fieldPath="emailAddress"/>
+        <fields fieldSeqId="05" fieldPath="externalUserId"/>
+
+        <feeds dataFeedId="WorkflowSearch"/>
+    </dataDocuments>
+    <dataDocuments dataDocumentId="UserGroup" documentName="User Group" documentTitle="${description}" indexName="workflow" primaryEntityName="moqui.security.UserGroup">
+        <fields fieldSeqId="01" fieldPath="userGroupId"/>
+        <fields fieldSeqId="02" fieldPath="description"/>
+
+        <feeds dataFeedId="WorkflowSearch"/>
+    </dataDocuments>
+
+</entity-facade-xml>

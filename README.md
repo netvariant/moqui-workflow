@@ -76,7 +76,7 @@ You can define a new workflow type in your component seed data as follows:
 $ <moqui.workflow.WorkflowType typeId="WF_EXAMPLE" typeName="Example Workflow" statusTypeId="ExampleStatus" primaryEntityName="moqui.example.Example" primaryViewEntityName="moqui.example.Example" primaryKeyField="exampleId"/>
 ```
 
-The brief explanation of the workflow type fields can be found in the table below:
+A brief explanation of the workflow type fields can be found in the table below:
 
 | Field Name | Description |
 | :--- | :--- |

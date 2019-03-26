@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-2.1.xsd">
+
+    <!-- User -->
+    <service verb="find" noun="User" type="java" location="org.moqui.security.UserService" method="findUsers">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.security.UserAccount">
+                <exclude field-name="currentPassword"/>
+                <exclude field-name="resetPassword"/>
+                <exclude field-name="passwordSalt"/>
+                <exclude field-name="passwordHashType"/>
+                <exclude field-name="passwordBase64"/>
+                <exclude field-name="passwordSetDate"/>
+                <exclude field-name="passwordHint"/>
+            </auto-parameters>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="userList" type="List">
+                <parameter name="user" type="Map">
+                    <auto-parameters entity-name="moqui.security.UserAccount">
+                        <exclude field-name="currentPassword"/>
+                        <exclude field-name="resetPassword"/>
+                        <exclude field-name="passwordSalt"/>
+                        <exclude field-name="passwordHashType"/>
+                        <exclude field-name="passwordBase64"/>
+                        <exclude field-name="passwordSetDate"/>
+                        <exclude field-name="passwordHint"/>
+                    </auto-parameters>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+    <service verb="login" noun="User" type="java" location="org.moqui.security.UserService" method="loginUser">
+        <in-parameters/>
+        <out-parameters>
+            <parameter name="apiKey"/>
+            <parameter name="sessionToken"/>
+            <parameter name="userId"/>
+            <parameter name="userFullName"/>
+        </out-parameters>
+    </service>
+    <service verb="logout" noun="User" type="java" location="org.moqui.security.UserService" method="logoutUser">
+        <in-parameters/>
+        <out-parameters>
+            <parameter name="userId"/>
+        </out-parameters>
+    </service>
+
+    <!-- User groups -->
+    <service verb="find" noun="UserGroup" type="java" location="org.moqui.security.UserGroupService" method="findUserGroups">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.security.UserGroup"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="orderByField"/>
+            <parameter name="filter"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="totalRows" type="Long"/>
+            <parameter name="userGroupList" type="List">
+                <parameter name="userGroup" type="Map">
+                    <auto-parameters entity-name="moqui.security.UserGroup"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+
+</services>

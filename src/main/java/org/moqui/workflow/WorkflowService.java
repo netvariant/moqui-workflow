@@ -45,7 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Service to manage workflow and execute workflow instances.
+ * Service to manage workflows and execute workflow instances.
  */
 @SuppressWarnings("unused")
 public class WorkflowService {

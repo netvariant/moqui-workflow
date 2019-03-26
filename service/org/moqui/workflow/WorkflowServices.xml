@@ -2,6 +2,24 @@
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-2.1.xsd">
 
+    <!-- Workflow type -->
+    <service verb="find" noun="WorkflowType" type="java" location="org.moqui.workflow.WorkflowTypeService" method="findWorkflowTypes">
+        <in-parameters>
+            <auto-parameters entity-name="moqui.workflow.WorkflowType"/>
+            <parameter name="pageIndex" type="Integer"/>
+            <parameter name="pageSize" type="Integer"/>
+            <parameter name="pageNoLimit" type="Boolean" default="false"/>
+            <parameter name="orderByField"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="workflowTypeList" type="List">
+                <parameter name="workflowType" type="Map">
+                    <auto-parameters entity-name="moqui.workflow.WorkflowType"/>
+                </parameter>
+            </parameter>
+        </out-parameters>
+    </service>
+
     <!-- Workflow -->
     <service verb="find" noun="Workflow" type="java" location="org.moqui.workflow.WorkflowService" method="findWorkflows">
         <in-parameters>

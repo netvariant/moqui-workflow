@@ -22,6 +22,11 @@
                 <entity name="moqui.basic.Geo" operation="list"/>
             </method>
         </resource>
+        <resource name="statusFlow">
+            <method type="get">
+                <entity name="moqui.basic.StatusFlowItem" operation="list"/>
+            </method>
+        </resource>
         <resource name="statusItem">
             <method type="get">
                 <entity name="moqui.basic.StatusFlowItem" operation="list"/>
@@ -35,6 +40,35 @@
                 <entity name="moqui.entity.EntityFieldDetail" operation="list"/>
             </method>
         </resource>
+    </resource>
+
+    <resource name="security" description="Security API" version="1.0.0">
+        <resource name="user">
+            <method type="get">
+                <service name="org.moqui.security.SecurityServices.find#User"/>
+            </method>
+            <resource name="login" require-authentication="anonymous-all">
+                <method type="post">
+                    <service name="org.moqui.security.SecurityServices.login#User"/>
+                </method>
+            </resource>
+            <resource name="logout" require-authentication="anonymous-all">
+                <method type="post">
+                    <service name="org.moqui.security.SecurityServices.logout#User"/>
+                </method>
+            </resource>
+        </resource>
+        <resource name="userGroup">
+            <method type="get">
+                <service name="org.moqui.security.SecurityServices.find#UserGroup"/>
+            </method>
+        </resource>
+    </resource>
+
+    <resource name="workflowType" description="Workflow Type API" version="1.0.0">
+        <method type="get">
+            <service name="org.moqui.workflow.WorkflowServices.find#WorkflowType"/>
+        </method>
     </resource>
 
     <resource name="workflow" description="Workflow API" version="1.0.0">
