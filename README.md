@@ -63,17 +63,17 @@ $ ./gradlew getComponent -Pcomponent=moqui-workflow
 Configuring the workflow engine involves these tasks.
 
 * Define workflow types
+* Expose entity fields
 * Design a workflow
 * Trigger workflow engine
 
 ### Define workflow types
 
 Workflow types are stores in the `moqui.workflow.WorkflowType` entity and must be defined before the workflow engine is used.
-
 You can define a new workflow type in your component seed data as follows:
 
-```shell
-$ <moqui.workflow.WorkflowType typeId="WF_EXAMPLE" typeName="Example Workflow" statusTypeId="ExampleStatus" primaryEntityName="moqui.example.Example" primaryViewEntityName="moqui.example.Example" primaryKeyField="exampleId"/>
+```xml
+<moqui.workflow.WorkflowType typeId="WF_EXAMPLE" typeName="Example Workflow" statusTypeId="ExampleStatus" primaryEntityName="moqui.example.Example" primaryViewEntityName="moqui.example.Example" primaryKeyField="exampleId"/>
 ```
 
 A brief explanation of the workflow type fields can be found in the table below:
@@ -86,6 +86,15 @@ A brief explanation of the workflow type fields can be found in the table below:
 | primaryEntityName | Entity used by the workflow engine for write operations |
 | primaryViewEntityName | View entity used by the workflow engine for read operations |
 | primaryKeyField | Entity primary key field name |
+
+### Expose entity fields
+
+You may not wish to expose all entity fields in the workflow designer. You can control this using the `moqui.entity.EntityField` entity.
+You can define a new workflow type in your component seed data as follows:
+
+```xml
+<commons.entity.EntityField entityName="moqui.example.Example" fieldTypeEnumId="ENTITY_FLD_TEXT" fieldName="exampleName" displayName="Example Name"/>
+```
 
 ### Design a workflow
 
