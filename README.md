@@ -98,7 +98,7 @@ You can define a new workflow type in your component seed data as follows:
 
 ### Design a workflow
 
-You can design workflow using the standalone [Workflow Builder](https://github.com/Netvariant/workflow-builder).
+You can design workflow using the standalone [Workflow Designer](https://github.com/Netvariant/workflow-designer).
 
 ### Trigger workflow engine
 
