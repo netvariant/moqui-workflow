@@ -7,6 +7,7 @@ Extendable workflow engine for the [Moqui Framework](https://www.moqui.org).
 - [Concepts](#concepts)
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [User Groups](#user groups)
 - [Authors](#authors)
 - [License](#license)
 
@@ -113,6 +114,15 @@ You can start/stop workflow instances using Moqui services. The workflow engine 
 | moqui.workflow.WorkflowServices.abort#WorkflowInstance | Aborts an active workflow instance | 
 
 In a real life scenario you calling the above services using SECA/EECA rules.
+
+## User Groups
+
+Loading the `moqui-workflow` component seed data will automatically create two user groups:
+
+| Group Name | Description |
+| :--- | :--- |
+| Workflow App (via root screen) | Allows access to the workflow application within Moqui |
+| Moqui Workflow REST API | Allows access to the workflow REST APIs, this is required by the workflow designer |
 
 ## Authors
 
