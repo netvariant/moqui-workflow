@@ -7,7 +7,7 @@ Extendable workflow engine for the [Moqui Framework](https://www.moqui.org).
 - [Concepts](#concepts)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [User Groups](#user groups)
+- [User Groups](#user-groups)
 - [Authors](#authors)
 - [License](#license)
 
