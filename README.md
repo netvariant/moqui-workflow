@@ -121,7 +121,7 @@ Loading the `moqui-workflow` component seed data will automatically create two u
 
 | Group Name | Description |
 | :--- | :--- |
-| Workflow App (via root screen) | Allows access to the workflow application within Moqui |
+| Workflow App | Allows access to the workflow application within Moqui |
 | Moqui Workflow REST API | Allows access to the workflow REST APIs, this is required by the workflow designer |
 
 ## Authors
