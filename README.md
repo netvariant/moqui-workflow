@@ -7,7 +7,7 @@ Extendable workflow engine for the [Moqui Framework](https://www.moqui.org).
 - [Concepts](#concepts)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [User Groups](#user-groups)
+- [Artifact Groups](#artifact-groups)
 - [Authors](#authors)
 - [License](#license)
 
@@ -74,7 +74,7 @@ Workflow types are stores in the `moqui.workflow.WorkflowType` entity and must b
 You can define a new workflow type in your component seed data as follows:
 
 ```xml
-<moqui.workflow.WorkflowType typeId="WF_EXAMPLE" typeName="Example Workflow" statusTypeId="ExampleStatus" primaryEntityName="moqui.example.Example" primaryViewEntityName="moqui.example.Example" primaryKeyField="exampleId"/>
+<moqui.workflow.WorkflowType typeId="WF_FOO" typeName="Foo Workflow" statusTypeId="FooStatus" primaryEntityName="moqui.test.Foo" primaryViewEntityName="moqui.test.Foo" primaryKeyField="fooId"/>
 ```
 
 A brief explanation of the workflow type fields can be found in the table below:
@@ -94,12 +94,12 @@ You may not wish to expose all entity fields in the workflow designer. You can c
 You can define a new workflow type in your component seed data as follows:
 
 ```xml
-<moqui.entity.EntityField entityName="moqui.example.Example" fieldTypeEnumId="ENTITY_FLD_TEXT" fieldName="exampleName" displayName="Example Name"/>
+<moqui.entity.EntityField entityName="moqui.test.Foo" fieldTypeEnumId="ENTITY_FLD_TEXT" fieldName="fooText" displayName="Foo Text"/>
 ```
 
 ### Design a workflow
 
-You can design workflow using the standalone [Workflow Designer](https://github.com/Netvariant/workflow-designer).
+You can design workflows using the standalone [Workflow Designer](https://github.com/Netvariant/workflow-designer).
 
 ### Trigger workflow engine
 
@@ -115,9 +115,9 @@ You can start/stop workflow instances using Moqui services. The workflow engine 
 
 In a real life scenario you calling the above services using SECA/EECA rules.
 
-## User Groups
+## Artifact Groups
 
-Loading the `moqui-workflow` component seed data will automatically create two user groups:
+Loading the `moqui-workflow` component seed data will automatically create two artifact groups. Add them to your user groups to grant members access.
 
 | Group Name | Description |
 | :--- | :--- |

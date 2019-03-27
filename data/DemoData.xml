@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--                                                                 -->
+<!-- NOTE: This file provides demo workflow setup, you can delete it -->
+<!--                                                                 -->
+<entity-facade-xml type="seed">
+
+    <!-- Foo status -->
+    <moqui.basic.StatusType statusTypeId="FooStatus" description="Foo Status"/>
+    <moqui.basic.StatusItem statusTypeId="FooStatus" statusId="FOO_STAT_PEND" sequenceNum="1" description="Pending"/>
+    <moqui.basic.StatusItem statusTypeId="FooStatus" statusId="FOO_STAT_PROGRESS" sequenceNum="2" description="In Progress"/>
+    <moqui.basic.StatusItem statusTypeId="FooStatus" statusId="FOO_STAT_DONE" sequenceNum="3" description="Done"/>
+    <moqui.basic.StatusItem statusTypeId="FooStatus" statusId="FOO_STAT_CANCEL" sequenceNum="4" description="Canceled"/>
+
+    <!-- Foo status flow -->
+    <moqui.basic.StatusFlow statusFlowId="FooStatusFlow" statusTypeId="FooStatus" description="Foo Status Flow"/>
+    <moqui.basic.StatusFlowItem statusFlowId="FooStatusFlow" statusId="FOO_STAT_PEND" isInitial="Y"/>
+    <moqui.basic.StatusFlowItem statusFlowId="FooStatusFlow" statusId="FOO_STAT_PROGRESS" isInitial="N"/>
+    <moqui.basic.StatusFlowItem statusFlowId="FooStatusFlow" statusId="FOO_STAT_DONE" isInitial="N"/>
+    <moqui.basic.StatusFlowItem statusFlowId="FooStatusFlow" statusId="FOO_STAT_CANCEL" isInitial="N"/>
+    <moqui.basic.StatusFlowTransition statusFlowId="FooStatusFlow" statusId="FOO_STAT_PEND" toStatusId="FOO_STAT_PROGRESS" transitionSequence="1" transitionName="Start"/>
+    <moqui.basic.StatusFlowTransition statusFlowId="FooStatusFlow" statusId="FOO_STAT_PROGRESS" toStatusId="FOO_STAT_DONE" transitionSequence="1" transitionName="Complete"/>
+    <moqui.basic.StatusFlowTransition statusFlowId="FooStatusFlow" statusId="FOO_STAT_PROGRESS" toStatusId="FOO_STAT_CANCEL" transitionSequence="2" transitionName="Cancel"/>
+
+    <!-- Plug workflow types -->
+    <moqui.workflow.WorkflowType typeId="WF_FOO" typeName="Foo Workflow" statusTypeId="FooStatus" primaryEntityName="moqui.test.Foo" primaryViewEntityName="moqui.test.Foo" primaryKeyField="fooId"/>
+
+    <!-- Plug entity fields -->
+    <moqui.entity.EntityField entityName="moqui.test.Foo" fieldTypeEnumId="ENTITY_FLD_TEXT" fieldName="fooId" displayName="Foo ID"/>
+    <moqui.entity.EntityField entityName="moqui.test.Foo" fieldTypeEnumId="ENTITY_FLD_TEXT" fieldName="fooText" displayName="Foo Text"/>
+
+</entity-facade-xml>
